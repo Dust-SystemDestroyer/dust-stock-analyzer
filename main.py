@@ -37,7 +37,7 @@ def send_mail(content):
 def run_analysis():
     # 분석할 종목 (원하는 대로 추가 가능)
     # 미국 유망 기업 10개 + 한국 유망 기업 10개 (총 20개)
-tickers = [
+    tickers = [
     # --- 미국 (US) ---
     'AAPL',  # 애플 (IT/하드웨어)
     'TSLA',  # 테슬라 (전기차/AI)
@@ -133,3 +133,4 @@ tickers = [
 if __name__ == "__main__":
 
     run_analysis()
+

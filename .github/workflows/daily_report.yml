@@ -1,0 +1,30 @@
+name: Daily Stock Analysis Report
+
+on:
+  schedule:
+    # 매일 아침 한국 시간(KST) 기준 약 8~9시 사이에 실행 (UTC 23:30)
+    - cron: '30 23 * * *'
+  workflow_dispatch: # 수동으로도 실행 버튼을 누를 수 있게 해줌
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install finance-datareader pandas numpy scikit-learn
+
+    - name: Run analysis
+      env:
+        # 깃허브 금고(Secrets)에서 비밀번호를 꺼내와서 파이썬에 전달!
+        GMAIL_PW: ${{ secrets.GMAIL_PW }}
+      run: python main.py
